@@ -13,7 +13,8 @@ fi
 # Source aliases
 source "$HOME"/.aliasesrc
 
-# Source ENV
+# Source some files
+source "$HOME"/dotfiles/zsh/aliases.zsh
 source "$HOME"/dotfiles/zsh/env.zsh
 
 
@@ -23,13 +24,7 @@ antigen init "$HOME"/.antigenrc
 # colored completion - use my LS_COLORS
 zstyle ':completion:*:default' list-colors "${(s.:.)LS_COLORS}"
 
-# plugins=(git colorize docker-compose history mvn themes zsh_reload vagrant )
-# plugins+=(zsh-dircolors-solarized)
-# plugins+=(zsh-syntax-highlighting)
-# plugins+=(zsh-autosuggestions)
-# plugins+=(zsh-z)
-# plugins+=(dirhistory)
-# plugins+=(fzf)
+# plugins=(fzf)
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
