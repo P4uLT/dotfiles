@@ -4,6 +4,11 @@ curl
 wget
 git
 zsh
+tmux
+vim
 
-# Install Antigen
-sudo bash -c "curl -L git.io/antigen > /usr/share/zsh-antigen/antigen.zsh"
+
+# TODO
+
+tmux
+vim

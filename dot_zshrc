@@ -6,7 +6,9 @@ if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]
 fi
 
 # Load Antigen
-source "$HOME"/.antigen/antigen.zsh
+if [[ -f "$HOME"/.antigen/antigen.zsh ]]; then
+    source  "$HOME"/.antigen/antigen.zsh
+fi
 
 # Source aliases
 source "$HOME"/.aliasesrc

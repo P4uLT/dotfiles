@@ -20,6 +20,7 @@ antigen bundle common-aliases
 antigen bundle compleat
 antigen bundle web-search
 antigen bundle vagrant
+antigen bundle asdf
 
 # antigen bundle pyenv
 # antigen bundle mvn
@@ -35,6 +36,10 @@ antigen bundle agkozak/zsh-z
 antigen bundle bobthecow/git-flow-completion
 antigen bundle zdharma/zsh-diff-so-fancy
 
+antigen bundle zsh-users/zsh-history-substring-search
+
+
+# antigen bundle kiurchv/asdf.plugin.zsh
 # antigen bundle matthieusb/zsh-sdkman
 # antigen bundle mattberther/zsh-pyenv
 # antigen bundle lukechilds/zsh-nvm
