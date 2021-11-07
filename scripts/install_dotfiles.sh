@@ -8,8 +8,9 @@ echo_task() {
 
 get_default_branch() {
   path=$1
-  git -C "${path}" remote show origin | grep 'HEAD branch' | cut -d' ' -f5
+  git -C "${path}" symbolic-ref refs/remotes/origin/HEAD | sed 's@^refs/remotes/origin/@@'
 }
+
 
 git_clean() {
   path=$(realpath "$1")
@@ -34,7 +35,7 @@ DOTFILES_REPO_GIT="git@${DOTFILES_HOST}:${DOTFILES_USER}/dotfiles"
 DOTFILES_BRANCH=${DOTFILES_BRANCH:-"main"}
 DOTFILES_DIR="${HOME}/.dotfiles"
 
-if command -v git >/dev/null 2>&1; then
+if ! command -v git >/dev/null 2>&1; then
   echo "Git does not seems to be installed"
   if ! sudo -n true 2>/dev/null; then
     echo_task "Prompting for sudo password to install Git"
