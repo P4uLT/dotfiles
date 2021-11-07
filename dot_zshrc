@@ -10,9 +10,6 @@ if [[ -f "$HOME"/.antigen/antigen.zsh ]]; then
     source  "$HOME"/.antigen/antigen.zsh
 fi
 
-# Source aliases
-source "$HOME"/.aliasesrc
-
 # Source some files
 source "$HOME"/dotfiles/zsh/aliases.zsh
 source "$HOME"/dotfiles/zsh/env.zsh
