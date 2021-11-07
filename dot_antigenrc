@@ -4,6 +4,9 @@ antigen use oh-my-zsh
 
 # Bundles from the default repo (robbyrussell's oh-my-zsh).
 antigen bundle git
+antigen bundle git-extras
+antigen bundle git-flow
+
 antigen bundle colorize
 antigen bundle command-not-found
 antigen bundle docker
@@ -22,6 +25,8 @@ antigen bundle web-search
 antigen bundle vagrant
 antigen bundle asdf
 
+antigen bundle tmux
+
 # antigen bundle pyenv
 # antigen bundle mvn
 
@@ -33,7 +38,10 @@ antigen bundle zsh-users/zsh-syntax-highlighting
 antigen bundle joel-porquet/zsh-dircolors-solarized.git
 antigen bundle agkozak/zsh-z
 
-antigen bundle bobthecow/git-flow-completion
+antigen bundle supercrabtree/k
+
+
+# antigen bundle bobthecow/git-flow-completion
 antigen bundle zdharma/zsh-diff-so-fancy
 
 antigen bundle zsh-users/zsh-history-substring-search
