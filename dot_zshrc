@@ -13,6 +13,10 @@ fi
 # Source aliases
 source "$HOME"/.aliasesrc
 
+# Source ENV
+source "$HOME"/dotfiles/zsh/env.zsh
+
+
 # Initialize antigen
 antigen init "$HOME"/.antigenrc
 
