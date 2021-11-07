@@ -24,11 +24,14 @@ git_clean() {
   unset branch
   unset git
 }
-
-DOTFILES_REPO_HOST=${DOTFILES_REPO_HOST:-"https://github.com"}
+DOTFILES_HOST=${DOTFILES_HOST:-"github.com"}
 DOTFILES_USER=${DOTFILES_USER:-"P4uLT"}
-DOTFILES_REPO="${DOTFILES_REPO_HOST}/${DOTFILES_USER}/dotfiles"
-DOTFILES_BRANCH=${DOTFILES_BRANCH:-"master"}
+
+DOTFILES_REPO_HOST_HTTPS=${DOTFILES_REPO_HOST_HTTPS:-"https://${DOTFILES_HOST}"}
+DOTFILES_REPO="${DOTFILES_REPO_HOST_HTTPS}/${DOTFILES_USER}/dotfiles"
+
+DOTFILES_REPO_GIT="git@${DOTFILES_HOST}:${DOTFILES_USER}/dotfiles"
+DOTFILES_BRANCH=${DOTFILES_BRANCH:-"main"}
 DOTFILES_DIR="${HOME}/.dotfiles"
 
 if command -v git >/dev/null 2>&1; then
@@ -46,7 +49,7 @@ if [ -d "${DOTFILES_DIR}" ]; then
   git_clean "${DOTFILES_DIR}"
 else
   echo_task "Cloning ${DOTFILES_REPO} on branch ${DOTFILES_BRANCH} to ${DOTFILES_DIR}"
-  git clone -b "${DOTFILES_BRANCH}" "${DOTFILES_REPO}" "${DOTFILES_DIR}"
+  git clone -b "${DOTFILES_BRANCH}" "${DOTFILES_REPO_GIT}" "${DOTFILES_DIR}"
 fi
 
 if [ -f "${DOTFILES_DIR}/install.sh" ]; then
