@@ -30,7 +30,6 @@ antigen bundle tmux
 # antigen bundle pyenv
 # antigen bundle mvn
 
-
 # Load bundles from external repos
 antigen bundle zsh-users/zsh-completions
 antigen bundle zsh-users/zsh-autosuggestions
@@ -39,20 +38,21 @@ antigen bundle joel-porquet/zsh-dircolors-solarized.git
 antigen bundle agkozak/zsh-z
 
 antigen bundle supercrabtree/k
+antigen bundle Aloxaf/fzf-tab
 
-
-# antigen bundle bobthecow/git-flow-completion
-antigen bundle zdharma/zsh-diff-so-fancy
+antigen bundle bobthecow/git-flow-completion
+#antigen bundle zdharma/zsh-diff-so-fancy
 
 antigen bundle zsh-users/zsh-history-substring-search
+
+antigen bundle wfxr/forgit
 
 
 # antigen bundle kiurchv/asdf.plugin.zsh
 # antigen bundle matthieusb/zsh-sdkman
 # antigen bundle mattberther/zsh-pyenv
 # antigen bundle lukechilds/zsh-nvm
-# antigen bundle unixorn/autoupdate-antigen.zshplugin
-
+antigen bundle unixorn/autoupdate-antigen.zshplugin
 
 # Load the theme.
 antigen theme romkatv/powerlevel10k
