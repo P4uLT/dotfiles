@@ -2,3 +2,24 @@
 
 {{- /* This retains the value passed with --source on chezmoi init, which is used in the ./install script */ -}}
 sourceDir: "{{ .chezmoi.sourceDir }}"
+
+{{- $chezmoiForce := or (has "--force" .chezmoi.args) (has "--force=true" .chezmoi.args) -}}
+
+{{- $isWork := false -}}
+{{- if hasKey . "is_work" -}}
+{{-   $isWork = .is_work -}}
+{{- end -}}
+{{- if and stdinIsATTY (not $chezmoiForce) -}}
+{{-   $isWork = promptBool "Is this a work environment" $isWork -}}
+{{-   writeToStdout "\n💡 Tip: you can always make chezmoi ask this again by running `chezmoi init` without `--force`.\n" -}}
+{{- end -}}
+
+{{- $isPersonal := not $isWork -}}
+
+{{- $isGnome := lookPath "gnome-shell" | not | not -}}
+
+# Here we "export" the variables, so we can access them outside this file
+data:
+  is_personal: {{ $isPersonal }}
+  is_work: {{ $isWork }}
+  is_gnome: {{ $isGnome }}
