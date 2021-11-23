@@ -48,10 +48,22 @@
   url: https://raw.githubusercontent.com/romkatv/powerlevel10k-media/{{ template "getGithubHeadRevision" dict "repo" "romkatv/powerlevel10k-media" "cache" $githubHeadRevisions }}/MesloLGS NF Bold Italic.ttf
   refreshPeriod: 168h
 
-
 {{   if .is_gnome -}}
 ".local/bin/gnome-shell-extension-installer":
   type: file
   url: "https://raw.githubusercontent.com/brunelli/gnome-shell-extension-installer/{{ template "getGithubHeadRevision" dict "repo" "brunelli/gnome-shell-extension-installer" "cache" $githubHeadRevisions }}/gnome-shell-extension-installer"
   executable: true
 {{-  end }}
+
+'.tmux/':
+  type: archive
+  url: https://github.com/gpakosz/.tmux/archive/{{ template "getGithubHeadRevision" dict "repo" "gpakosz/.tmux" "cache" $githubHeadRevisions }}.tar.gz
+  refreshPeriod: 168h
+  stripComponents: 1
+  exact: true
+
+'.tmux.conf.local':
+  type: file
+  url: "https://raw.githubusercontent.com/gpakosz/.tmux/{{ template "getGithubHeadRevision" dict "repo" "gpakosz/.tmux" "cache" $githubHeadRevisions }}/.tmux.conf.local"
+  stripComponents: 1
+  exact: true
