@@ -1,3 +1,57 @@
+{{- define "getGithubHeadRevision" -}}
+{{-   $repo := get . "repo" -}}
+{{-   $cache := get . "cache" -}}
+{{-   if hasKey $cache $repo -}}
+{{-     get $cache $repo -}}
+{{-   else -}}
+{{-     $result := output "git" "ls-remote" (printf "https://github.com/%s.git" $repo) "HEAD" | trimSuffix "HEAD\n" | trim -}}
+{{-     $_ := set $cache $repo $result -}}
+{{-     $result -}}
+{{-   end -}}
+{{- end -}}
+
+{{- define "getGithubLatestVersion" -}}
+{{-   $repo := get . "repo" -}}
+{{-   $cache := get . "cache" -}}
+{{-   if hasKey $cache $repo -}}
+{{-     get $cache $repo -}}
+{{-   else -}}
+{{-     $result := output "curl" "-fsSL" "-o" "/dev/null" "-w" "%{url_effective}" (printf "https://github.com/%s/releases/latest" $repo) | trim | base | trimPrefix "v" -}}
+{{-     $_ := set $cache $repo $result -}}
+{{-     $result -}}
+{{-   end -}}
+{{- end -}}
+
+{{- $githubHeadRevisions := dict -}}
+{{- $githubLatestVersions := dict -}}
+
+{{-   $fontDir := ".local/share/fonts" }}
 ".antigen/antigen.zsh":
   type: file
   url: "https://git.io/antigen"
+
+
+'{{ $fontDir }}/MesloLGS NF Regular.ttf':
+  type: file
+  url: https://raw.githubusercontent.com/romkatv/powerlevel10k-media/{{ template "getGithubHeadRevision" dict "repo" "romkatv/powerlevel10k-media" "cache" $githubHeadRevisions }}/MesloLGS NF Regular.ttf
+  refreshPeriod: 168h
+'{{ $fontDir }}/MesloLGS NF Bold.ttf':
+  type: file
+  url: https://raw.githubusercontent.com/romkatv/powerlevel10k-media/{{ template "getGithubHeadRevision" dict "repo" "romkatv/powerlevel10k-media" "cache" $githubHeadRevisions }}/MesloLGS NF Bold.ttf
+  refreshPeriod: 168h
+'{{ $fontDir }}/MesloLGS NF Italic.ttf':
+  type: file
+  url: https://raw.githubusercontent.com/romkatv/powerlevel10k-media/{{ template "getGithubHeadRevision" dict "repo" "romkatv/powerlevel10k-media" "cache" $githubHeadRevisions }}/MesloLGS NF Italic.ttf
+  refreshPeriod: 168h
+'{{ $fontDir }}/MesloLGS NF Bold Italic.ttf':
+  type: file
+  url: https://raw.githubusercontent.com/romkatv/powerlevel10k-media/{{ template "getGithubHeadRevision" dict "repo" "romkatv/powerlevel10k-media" "cache" $githubHeadRevisions }}/MesloLGS NF Bold Italic.ttf
+  refreshPeriod: 168h
+
+
+{{   if .is_gnome -}}
+".local/bin/gnome-shell-extension-installer":
+  type: file
+  url: "https://raw.githubusercontent.com/brunelli/gnome-shell-extension-installer/{{ template "getGithubHeadRevision" dict "repo" "brunelli/gnome-shell-extension-installer" "cache" $githubHeadRevisions }}/gnome-shell-extension-installer"
+  executable: true
+{{-  end }}
