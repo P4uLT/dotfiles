@@ -9,3 +9,5 @@ direnv_layout_dir() {
 	mkdir -p "${XDG_CACHE_HOME}/direnv/layouts/${pwd_hash}"
 	echo "${XDG_CACHE_HOME}/direnv/layouts/${pwd_hash}"
 }
+
+use asdf
