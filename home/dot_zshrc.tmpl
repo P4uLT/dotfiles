@@ -27,7 +27,12 @@ antigen init "$HOME"/.antigenrc
 # colored completion - use my LS_COLORS
 zstyle ':completion:*:default' list-colors "${(s.:.)LS_COLORS}"
 
-# plugins=(fzf)
+# Hook direnv into your shell
+eval "$(direnv hook zsh)"
+
+# A shortcut for asdf managed direnv
+direnv() { asdf exec direnv "$@"; }
+
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
