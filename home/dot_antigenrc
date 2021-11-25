@@ -40,6 +40,8 @@ antigen bundle zsh-users/zsh-history-substring-search
 antigen bundle wfxr/forgit
 antigen bundle unixorn/autoupdate-antigen.zshplugin
 
+antigen bundle sudosubin/zsh-github-cli
+
 # Load the theme.
 antigen theme romkatv/powerlevel10k
 
