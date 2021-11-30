@@ -1,0 +1,38 @@
+{{ if (eq .chezmoi.os "linux") -}}
+{{ if (eq .chezmoi.osRelease.id "debian" "ubuntu") -}}
+
+#!/bin/bash
+
+set -euo pipefail
+
+{{ if lookPath "add-apt-repository" | not -}}
+echo "Installing add-apt-repository"
+sudo apt update
+sudo apt install -y software-properties-common ca-certificates curl gnupg
+{{ end -}}
+
+echo "Setting up repositories"
+sudo add-apt-repository --no-update -y ppa:git-core/ppa
+sudo add-apt-repository --no-update -y ppa:phoerious/keepassxc
+
+sudo sh -c 'echo "deb [arch=amd64] https://download.docker.com/linux/ubuntu {{ .chezmoi.osRelease.ubuntuCodename }} stable" | sudo tee /etc/apt/sources.list.d/docker.list'
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+
+
+wget -qO- https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor > packages.microsoft.gpg
+sudo install -o root -g root -m 644 packages.microsoft.gpg /etc/apt/trusted.gpg.d/
+sudo sh -c 'echo "deb [arch=amd64,arm64,armhf signed-by=/etc/apt/trusted.gpg.d/packages.microsoft.gpg] https://packages.microsoft.com/repos/code stable main" | sudo tee /etc/apt/sources.list.d/vscode.list'
+rm -f packages.microsoft.gpg
+
+
+wget -qO- https://repo.vivaldi.com/archive/linux_signing_key.pub | gpg --dearmor > packages.vivaldi.gpg
+sudo install -o root -g root -m 644 packages.vivaldi.gpg /etc/apt/trusted.gpg.d
+sudo sh -c 'echo "deb [arch=amd64,armhf signed-by=/etc/apt/trusted.gpg.d/packages.vivaldi.gpg] https://repo.vivaldi.com/archive/deb stable main" | sudo tee /etc/apt/sources.list.d/vivaldi.list'
+rm -f packages.vivaldi.gpg
+
+echo "Setting up repositories... Done"
+
+
+{{ end -}}
+
+{{ end -}}

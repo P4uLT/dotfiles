@@ -1,0 +1,65 @@
+{{ if (eq .chezmoi.os "linux") -}}
+{{ if (eq .chezmoi.osRelease.id "debian" "ubuntu") -}}
+
+#!/bin/bash
+
+packages=(
+	curl
+	vim
+  wget
+	direnv
+  zsh
+  jq
+  bat
+  fzf
+  httpie
+  amazon-ecr-credential-helper
+  docker-ce
+  docker-ce-cli
+  docker-compose
+  code
+  vivaldi-stable
+  keepassxc
+  git-flow
+  mlocate
+)
+
+snaps=(
+  btop
+  slack
+)
+classic_snaps=()
+
+{{ if (and (eq .chezmoi.osRelease.id "ubuntu") (eq .chezmoi.osRelease.versionCodename "bionic")) }}
+classic_snaps+=(
+ripgrep
+)
+
+{{ end }}
+
+packages+=(
+	direnv
+	jq
+	units
+	zsh
+)
+
+sudo apt update
+
+sudo apt install -y ${packages[@]}
+
+{{ if (eq .chezmoi.osRelease.id "ubuntu") }}
+for snap in ${snaps[@]}; do
+	sudo snap install $snap
+done
+
+for classic_snap in ${classic_snaps[@]}; do
+	sudo snap install $classic_snap --classic
+done
+
+{{ end }}
+
+{{ end }}
+
+
+{{ end }}
