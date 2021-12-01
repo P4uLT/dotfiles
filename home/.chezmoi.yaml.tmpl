@@ -3,7 +3,14 @@
 {{- /* This retains the value passed with --source on chezmoi init, which is used in the ./install script */ -}}
 sourceDir: "{{ .chezmoi.sourceDir }}"
 
+{{- $personalName := "P4uLT" -}}
+{{- $personalEmail := "samter.thomas@gmail.com" -}}
+
 {{- $chezmoiForce := or (has "--force" .chezmoi.args) (has "--force=true" .chezmoi.args) -}}
+
+{{- $workName := "" -}}
+{{- $workEmail := "" -}}
+
 
 {{- $isWork := false -}}
 {{- if hasKey . "is_work" -}}
@@ -11,8 +18,13 @@ sourceDir: "{{ .chezmoi.sourceDir }}"
 {{- end -}}
 {{- if and stdinIsATTY (not $chezmoiForce) -}}
 {{-   $isWork = promptBool "Is this a work environment" $isWork -}}
+{{-   $workName = promptString "Git Name :" -}}
+{{-   $workEmail = promptString "Git Email :" -}}
 {{-   writeToStdout "\n💡 Tip: you can always make chezmoi ask this again by running `chezmoi init` without `--force`.\n" -}}
+
 {{- end -}}
+
+
 
 {{- $isPersonal := not $isWork -}}
 
@@ -23,3 +35,20 @@ data:
   is_personal: {{ $isPersonal }}
   is_work: {{ $isWork }}
   is_gnome: {{ $isGnome }}
+
+
+  personal_name: "{{ $personalName }}"
+  personal_email: "{{ $personalEmail }}"
+
+  work_name: "{{ $workName }}"
+  work_email: "{{ $workEmail }}"
+
+{{- if $isPersonal }}
+  name: "{{ $personalName }}"
+  email: "{{ $personalEmail }}"
+{{- else }}
+  name: "{{ $workName }}"
+  email: "{{ $workEmail }}"
+{{- end }}
+
+  editor: "code --wait"
