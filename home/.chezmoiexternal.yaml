@@ -26,27 +26,29 @@
 {{- $githubLatestVersions := dict -}}
 
 {{-   $fontDir := ".local/share/fonts" }}
+
 ".antigen/antigen.zsh":
   type: file
   url: "https://git.io/antigen"
 
-
 '{{ $fontDir }}/MesloLGS NF Regular.ttf':
   type: file
-  url: https://raw.githubusercontent.com/romkatv/powerlevel10k-media/{{ template "getGithubHeadRevision" dict "repo" "romkatv/powerlevel10k-media" "cache" $githubHeadRevisions }}/MesloLGS NF Regular.ttf
+  url: "https://raw.githubusercontent.com/romkatv/powerlevel10k-media/{{ template "getGithubHeadRevision" dict "repo" "romkatv/powerlevel10k-media" "cache" $githubHeadRevisions }}/MesloLGS NF Regular.ttf"
   refreshPeriod: 168h
-'{{ $fontDir }}/MesloLGS NF Bold.ttf':
-  type: file
-  url: https://raw.githubusercontent.com/romkatv/powerlevel10k-media/{{ template "getGithubHeadRevision" dict "repo" "romkatv/powerlevel10k-media" "cache" $githubHeadRevisions }}/MesloLGS NF Bold.ttf
-  refreshPeriod: 168h
-'{{ $fontDir }}/MesloLGS NF Italic.ttf':
-  type: file
-  url: https://raw.githubusercontent.com/romkatv/powerlevel10k-media/{{ template "getGithubHeadRevision" dict "repo" "romkatv/powerlevel10k-media" "cache" $githubHeadRevisions }}/MesloLGS NF Italic.ttf
-  refreshPeriod: 168h
-'{{ $fontDir }}/MesloLGS NF Bold Italic.ttf':
-  type: file
-  url: https://raw.githubusercontent.com/romkatv/powerlevel10k-media/{{ template "getGithubHeadRevision" dict "repo" "romkatv/powerlevel10k-media" "cache" $githubHeadRevisions }}/MesloLGS NF Bold Italic.ttf
-  refreshPeriod: 168h
+
+# '{{ $fontDir }}/MesloLGS NF Bold.ttf':
+#   type: file
+#   url: "https://raw.githubusercontent.com/romkatv/powerlevel10k-media/{{ template "getGithubHeadRevision" dict "repo" "romkatv/powerlevel10k-media" "cache" $githubHeadRevisions }}/MesloLGS NF Bold.ttf"
+#   refreshPeriod: 168h
+
+# '{{ $fontDir }}/MesloLGS NF Italic.ttf':
+#   type: file
+#   url: "https://raw.githubusercontent.com/romkatv/powerlevel10k-media/{{ template "getGithubHeadRevision" dict "repo" "romkatv/powerlevel10k-media" "cache" $githubHeadRevisions }}/MesloLGS NF Italic.ttf"
+#   refreshPeriod: 168h
+# '{{ $fontDir }}/MesloLGS NF Bold Italic.ttf':
+#   type: file
+#   url: "https://raw.githubusercontent.com/romkatv/powerlevel10k-media/{{ template "getGithubHeadRevision" dict "repo" "romkatv/powerlevel10k-media" "cache" $githubHeadRevisions }}/MesloLGS NF Bold Italic.ttf"
+#   refreshPeriod: 168h
 
 {{   if .is_gnome -}}
 ".local/bin/gnome-shell-extension-installer":
@@ -67,3 +69,11 @@
   url: "https://raw.githubusercontent.com/gpakosz/.tmux/{{ template "getGithubHeadRevision" dict "repo" "gpakosz/.tmux" "cache" $githubHeadRevisions }}/.tmux.conf.local"
   stripComponents: 1
   exact: true
+
+
+# '.asdf/':
+#   type: archive
+#   url: https://github.com/asdf-vm/asdf/archive/{{ template "getGithubHeadRevision" dict "repo" "asdf-vm/asdf" "cache" $githubLatestVersions }}.tar.gz
+#   refreshPeriod: 168h
+#   stripComponents: 1
+#   exact: true
