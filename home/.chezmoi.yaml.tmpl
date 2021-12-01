@@ -8,18 +8,30 @@ sourceDir: "{{ .chezmoi.sourceDir }}"
 
 {{- $chezmoiForce := or (has "--force" .chezmoi.args) (has "--force=true" .chezmoi.args) -}}
 
+
+{{- $isWork := false -}}
 {{- $workName := "" -}}
 {{- $workEmail := "" -}}
 
-
-{{- $isWork := false -}}
 {{- if hasKey . "is_work" -}}
 {{-   $isWork = .is_work -}}
 {{- end -}}
+
+{{- if hasKey . "work_name" -}}
+{{-   $workName = .work_name -}}
+{{- end -}}
+
+{{- if hasKey . "work_email" -}}
+{{-   $workEmail = .work_email -}}
+{{- end -}}
+
+
 {{- if and stdinIsATTY (not $chezmoiForce) -}}
 {{-   $isWork = promptBool "Is this a work environment" $isWork -}}
-{{-   $workName = promptString "Git Name :" -}}
-{{-   $workEmail = promptString "Git Email :" -}}
+  {{- if $isWork -}}
+  {{-   $workName = promptString "Git Name" $workName -}}
+  {{-   $workEmail = promptString "Git Email" $workEmail -}}
+  {{- end -}}
 {{-   writeToStdout "\n💡 Tip: you can always make chezmoi ask this again by running `chezmoi init` without `--force`.\n" -}}
 
 {{- end -}}
@@ -35,11 +47,8 @@ data:
   is_personal: {{ $isPersonal }}
   is_work: {{ $isWork }}
   is_gnome: {{ $isGnome }}
-
-
   personal_name: "{{ $personalName }}"
   personal_email: "{{ $personalEmail }}"
-
   work_name: "{{ $workName }}"
   work_email: "{{ $workEmail }}"
 
